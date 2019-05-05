@@ -24,7 +24,7 @@ RUN build/build.sh
 # STAGE 2: Runtime
 FROM alpine
 
-USER nobody:nobody
+#USER nobody:nobody
 COPY --from=build /go/bin/kuard /kuard
 
 CMD [ "/kuard" ]
