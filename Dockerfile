@@ -23,8 +23,10 @@ RUN build/build.sh
 
 # STAGE 2: Runtime
 FROM alpine
+RUN apk update && apk upgrade && apk add --no-cache libcap && \
+    setcap cap_net_raw=ep /bin/busybox
 
-#USER nobody:nobody
+USER nobody:nobody
 COPY --from=build /go/bin/kuard /kuard
 
 CMD [ "/kuard" ]
